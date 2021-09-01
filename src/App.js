@@ -1,18 +1,10 @@
 import React, { Component } from "react";
-// import ApolloClient from "apollo-boost";
-// import { ApolloProvider } from "react-apollo";
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  HttpLink,
-} from "@apollo/client";
+import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
 import Home from "./pages/Home/Home";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Navbar } from "./pages/components/Navbar/Navbar";
+import Navbar from "./pages/components/Navbar/Navbar";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
-
-// const localGraphQL = "http://localhost:4000/graphql";
+import Cart from "./pages/Cart/Cart";
 
 const link = new HttpLink({
   uri: "http://localhost:4000/",
@@ -34,6 +26,9 @@ export default class App extends Component {
           </Route>
           <Route path="/productDetail/:id">
             <ProductDetail />
+          </Route>
+          <Route path="/cart">
+            <Cart />
           </Route>
         </Switch>
       </Router>

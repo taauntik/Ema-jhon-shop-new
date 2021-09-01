@@ -47,15 +47,17 @@ const Price = styled.p`
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
-  color: #1D1F22;
+  color: #1d1f22;
 `;
 
 const AddToCartBtn = styled.div`
   background: #5ece7b;
-  padding: 10px;
+  padding: 10px 12px;
   border-radius: 52px;
+  z-index: 10;
   display: none;
   transform: translateY(-110px) translateX(200px);
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
 `;
 
 export {
@@ -65,5 +67,5 @@ export {
   ProductName,
   CardInfo,
   AddToCartBtn,
-  Price
+  Price,
 };

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const NavContainer = styled.div`
   top: 0;
@@ -56,6 +57,25 @@ export const SpecialNav = styled.p`
     bottom: 0;
   }
 `;
+
+export const NavLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+`;
+
+export const CartItemsLength = styled.div`
+  font-size: 12px;
+  background: #000000;
+  color: #fff;
+  padding: 2px 5px;
+  font-weight: bold;
+  position: absolute;
+  border-radius: 55px;
+  z-index: 20;
+  transform: translate(10px, -30px);
+`;
+
+
 
 export const NavIcon = styled.img``;
 

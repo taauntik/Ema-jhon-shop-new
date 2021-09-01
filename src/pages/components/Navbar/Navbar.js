@@ -1,8 +1,9 @@
-import React, { Component, useContext } from "react";
+import React, { Component } from "react";
 import Icon from "../../../assets/navIcon.svg";
 import DownArrow from "../../../assets/downArrow.svg";
 import UpperArrow from "../../../assets/upperArrow.svg";
 import Basket from "../../../assets/basket.svg";
+import { Link } from "react-router-dom";
 
 // styles
 import {
@@ -13,18 +14,23 @@ import {
   NavIcon,
   CurrencyDropDown,
   DownIcon,
+  NavLink,
+  CartItemsLength,
 } from "./Navbar.styles";
 import styled from "styled-components";
+import { connect } from "react-redux";
 
-export class Navbar extends Component {
+class Navbar extends Component {
   constructor() {
     super();
     this.state = {
       isOpen: false,
     };
   }
+
   render() {
     const { isOpen } = this.state;
+    const totalItems = this.props.cart.reduce((ack, item) => ack + item.amount, 0);
     return (
       <NavContainer>
         <Navs>
@@ -53,7 +59,16 @@ export class Navbar extends Component {
             <option value="3">Citroen</option>
             <option value="4">Ford</option>
           </CurrencyDropDown>
-          <img src={Basket} alt="" />
+          <div>
+            <NavLink to="/cart">
+              <Img src={Basket} alt="" />
+              {this.props.cart.length ? (
+                <CartItemsLength>{totalItems}</CartItemsLength>
+              ) : (
+                <div></div>
+              )}
+            </NavLink>
+          </div>
         </Navs>
       </NavContainer>
     );
@@ -79,3 +94,13 @@ const Select = styled.select`
     padding: 0px 2px 1px;
   }
 `;
+
+const Img = styled.img``;
+
+const mapStateToProps = (state) => {
+  return {
+    cart: state.cart,
+  };
+};
+
+export default connect(mapStateToProps)(Navbar);
