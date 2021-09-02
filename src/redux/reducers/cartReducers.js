@@ -1,6 +1,7 @@
 import {
   ADD_TO_CART,
   ADD_TO_PRODUCTS,
+  CHANGE_CURRENCY,
   // ADJUST_QTY,
   REMOVE_FROM_CART,
 } from "../actions/cartActions";
@@ -8,6 +9,7 @@ import {
 const initialState = {
   cart: [],
   products: [],
+  price: { currency: "USD", symbol: "$" },
 };
 
 const cartReducers = (state = initialState, action) => {
@@ -29,11 +31,6 @@ const cartReducers = (state = initialState, action) => {
       };
 
     case REMOVE_FROM_CART:
-      // const product = action.product;
-      // const remainingCart = state.cart.filter(
-      //   (item) => item.cartId !== product.cartId
-      // );
-      // return { ...state, cart: remainingCart };
       return {
         ...state,
         cart: state.cart.reduce((ack, item) => {
@@ -46,19 +43,17 @@ const cartReducers = (state = initialState, action) => {
         }, []),
       };
 
-    case ADD_TO_PRODUCTS:
-      //   console.log("action ", action);
-      return { ...state, products: action.products };
+    case CHANGE_CURRENCY:
+      return {
+        ...state,
+        price: {
+          currency: action.payload.currency,
+          symbol: action.payload.symbol,
+        },
+      };
 
-    // case ADJUST_QTY:
-    //   return {
-    //     ...state,
-    //     cart: state.cart.map((item) =>
-    //       item.id === action.payload.id
-    //         ? { ...item, qty: action.payload.qty }
-    //         : item
-    //     ),
-    //   };
+    case ADD_TO_PRODUCTS:
+      return { ...state, products: action.products };
 
     default:
       return { ...state };

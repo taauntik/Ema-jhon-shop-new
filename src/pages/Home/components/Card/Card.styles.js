@@ -7,10 +7,6 @@ const CardContainer = styled.div`
   padding: 10px;
   cursor: pointer;
   background-color: white;
-  margin: 20px 0px;
-  &:hover {
-    box-shadow: 0px 4px 35px #e8e7e3;
-  }
 
   :hover .btn {
     display: inline-block;
@@ -55,9 +51,14 @@ const AddToCartBtn = styled.div`
   padding: 10px 12px;
   border-radius: 52px;
   z-index: 10;
+  position: absolute;
+  cursor: pointer;
   display: none;
-  transform: translateY(-110px) translateX(200px);
+  transform: translateY(-140px) translateX(200px);
   box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+  :hover {
+    box-shadow: 0px 4px 35px #c7c7c7;
+  }
 `;
 
 export {

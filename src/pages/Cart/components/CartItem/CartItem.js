@@ -5,14 +5,21 @@ import AddOrRemoveBtn from "../../../components/AddOrRemoveBtn/AddOrRemoveBtn";
 class CartItem extends Component {
   render() {
     console.log("Props from the CartItem: ", this.props);
-    const { cart, addToCart, removeFromCart } = this.props;
+    const { cart, addToCart, removeFromCart, price } = this.props;
     const { name, prices, gallery, amount, id } = cart;
     return (
       <>
         <CartItemContainer>
           <CartItemStart>
             <h3>{name}</h3>
-            <p>${(prices[0].amount * amount).toFixed(2)}</p>
+            {prices.map(
+              (item) =>
+                item.currency === price.currency && (
+                  <p>
+                    {price.symbol} {(item.amount * amount).toFixed(2)}
+                  </p>
+                )
+            )}
           </CartItemStart>
           <CartItemEnd>
             <CartBtns>

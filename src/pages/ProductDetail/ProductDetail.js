@@ -83,15 +83,26 @@ class ProductDetail extends Component {
               {attributes.map((attr) => (
                 <AttrContainer key={attr.id}>
                   <h4>{attr.name}:</h4>
-                  {attr.items.map((item) => (
-                    <span style={{ marginRight: "20px" }}>
+                  {attr.items.map((item, index) => (
+                    <span
+                      key={`${index} ${new Date().getTime()}`}
+                      style={{ marginRight: "20px" }}
+                    >
                       {item.displayValue}
                     </span>
                   ))}
                 </AttrContainer>
               ))}
               <h4>Prices:</h4>
-              <span style={{ display: "block" }}>${prices[0].amount}</span>
+              {prices.map(
+                (item) =>
+                  item.currency === this.props.price.currency && (
+                    <span style={{ display: "block" }}>
+                      {this.props.price.symbol} {item.amount}
+                    </span>
+                  )
+              )}
+
               <AddToCart onClick={() => addToCart(this.state.product)}>
                 Add To Cart
               </AddToCart>
@@ -189,6 +200,7 @@ const AddToCart = styled.button`
 const mapStateToProps = (state) => {
   return {
     cart: state.cart,
+    price: state.price,
   };
 };
 

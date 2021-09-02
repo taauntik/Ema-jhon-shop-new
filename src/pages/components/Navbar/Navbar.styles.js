@@ -58,9 +58,10 @@ export const SpecialNav = styled.p`
   }
 `;
 
-export const NavLink = styled(Link)`
+export const NavLink = styled.div`
   text-decoration: none;
   color: black;
+  cursor: pointer;
 `;
 
 export const CartItemsLength = styled.div`
@@ -75,20 +76,17 @@ export const CartItemsLength = styled.div`
   transform: translate(10px, -30px);
 `;
 
-
-
 export const NavIcon = styled.img``;
 
 export const DownIcon = styled.img`
   margin-left: 5;
 `;
 
-export const CurrencyDropDown = styled.select`
+export const CurrencyDropDown = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 20px;
-  height: 20px;
+  height: 10px;
   border-radius: 6px;
   padding: 10px;
   cursor: pointer;
@@ -97,21 +95,7 @@ export const CurrencyDropDown = styled.select`
   outline: none;
   border: none;
 
-  &:hover {
-    background-color: lightgray;
-  }
-
-  &:focus {
-    outline: 0;
-  }
-
-  option {
-    color: black;
-    background: white;
-    display: flex;
-    white-space: pre;
-    min-height: 20px;
-    padding: 10px;
-    border: none;
+  :hover {
+    background-color: #ededed;
   }
 `;

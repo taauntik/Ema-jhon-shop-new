@@ -7,7 +7,7 @@ import CartItem from "./components/CartItem/CartItem";
 class Cart extends Component {
   render() {
     console.log(this.props);
-    const { cart, addToCart, removeFromCart } = this.props;
+    const { cart, addToCart, removeFromCart, price } = this.props;
     return (
       <CartContainer>
         <h1>CART</h1>
@@ -18,6 +18,7 @@ class Cart extends Component {
             cart={cartItem}
             addToCart={addToCart}
             removeFromCart={removeFromCart}
+            price={price}
           />
         ))}
       </CartContainer>
@@ -32,6 +33,7 @@ const CartContainer = styled.div`
 const mapStateToProps = (state) => {
   return {
     cart: state.cart,
+    price: state.price,
   };
 };
 
