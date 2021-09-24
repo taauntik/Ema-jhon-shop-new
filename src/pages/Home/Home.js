@@ -1,16 +1,14 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import Card from "./components/Card/Card";
-import { LOAD_CATEGORIES } from "../../GraphQL/Queries";
-import { client } from "../../App";
 
 import { Heading, Container, CardContainer } from "./Home.styles";
-import { addToProducts } from "../../redux/actions/cartActions";
 import { connect } from "react-redux";
+import { Overlay } from "../components/Overlay/Overlay";
 import styled from "styled-components";
 
 export const ProductsContext = React.createContext();
 
-class Home extends Component {
+class Home extends PureComponent {
   constructor() {
     super();
     this.state = {
@@ -18,19 +16,14 @@ class Home extends Component {
     };
   }
 
-  componentDidMount() {
-    client
-      .query({
-        query: LOAD_CATEGORIES,
-      })
-      .then(({ data }) => this.props.addToProducts(data));
-  }
-
   render() {
     const categories = this.props.products.categories;
     console.log(this.state.search);
+    console.log("Another props, ", this.props);
+
     return (
-      <ProductsContext.Provider value={{ categories: this.state.categories }}>
+      <div>
+        {this.props.isCartOpen && <Overlay />}
         <Container>
           <Heading>Category Name</Heading>
 
@@ -38,7 +31,7 @@ class Home extends Component {
             <SearchIcon src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDU2Ljk2NiA1Ni45NjYiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDU2Ljk2NiA1Ni45NjY7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxNnB4Ij4KPHBhdGggZD0iTTU1LjE0Niw1MS44ODdMNDEuNTg4LDM3Ljc4NmMzLjQ4Ni00LjE0NCw1LjM5Ni05LjM1OCw1LjM5Ni0xNC43ODZjMC0xMi42ODItMTAuMzE4LTIzLTIzLTIzcy0yMywxMC4zMTgtMjMsMjMgIHMxMC4zMTgsMjMsMjMsMjNjNC43NjEsMCw5LjI5OC0xLjQzNiwxMy4xNzctNC4xNjJsMTMuNjYxLDE0LjIwOGMwLjU3MSwwLjU5MywxLjMzOSwwLjkyLDIuMTYyLDAuOTIgIGMwLjc3OSwwLDEuNTE4LTAuMjk3LDIuMDc5LTAuODM3QzU2LjI1NSw1NC45ODIsNTYuMjkzLDUzLjA4LDU1LjE0Niw1MS44ODd6IE0yMy45ODQsNmM5LjM3NCwwLDE3LDcuNjI2LDE3LDE3cy03LjYyNiwxNy0xNywxNyAgcy0xNy03LjYyNi0xNy0xN1MxNC42MSw2LDIzLjk4NCw2eiIgZmlsbD0iIzAwMDAwMCIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K" />
             <Search
               className="search"
-              placeholder="Search Categories"
+              placeholder="Search by products name"
               type="text"
               value={this.state.search}
               onChange={(e) => this.setState({ search: e.target.value })}
@@ -64,7 +57,9 @@ class Home extends Component {
                 } else {
                   return products.map(
                     (pd) =>
-                      pd.category.includes(this.state.search) && (
+                      pd.name
+                        .toLowerCase()
+                        .includes(this.state.search.toLowerCase()) && (
                         <Card key={pd.id} product={pd} />
                       )
                   );
@@ -72,7 +67,7 @@ class Home extends Component {
               })}
           </CardContainer>
         </Container>
-      </ProductsContext.Provider>
+      </div>
     );
   }
 }
@@ -80,10 +75,10 @@ class Home extends Component {
 const Search = styled.input`
   border: 1px solid gray;
   border-radius: 5px;
-  height: 20px;
+  height: 30px;
   width: 100%;
-  padding: 2px 23px 2px 30px;
-  fontsize: 20px;
+  padding: 2px 30px;
+  font-size: 18px;
   outline: 0;
   background-color: #f5f5f5;
   :hover,
@@ -95,18 +90,17 @@ const Search = styled.input`
 
 const ClearIcon = styled.img`
   position: absolute;
-  top: 8px;
+  top: 10px;
   right: 8px;
-  width: 10px;
+  width: 18px;
   cursor: pointer;
-   <!-- visibility: hidden; -->
 `;
 
 const SearchIcon = styled.img`
   position: absolute;
-  top: 6px;
+  top: 10px;
   left: 8px;
-  width: 14px;
+  width: 18px;
 `;
 
 const Wrapper = styled.div`
@@ -119,11 +113,8 @@ const mapStateToProps = (state) => {
   return {
     products: state.products,
     price: state.price,
+    isCartOpen: state.isCartOpen,
   };
 };
 
-const mapDispatchToProps = {
-  addToProducts: addToProducts,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, null)(Home);

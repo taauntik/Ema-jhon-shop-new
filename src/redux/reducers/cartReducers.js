@@ -2,14 +2,17 @@ import {
   ADD_TO_CART,
   ADD_TO_PRODUCTS,
   CHANGE_CURRENCY,
-  // ADJUST_QTY,
   REMOVE_FROM_CART,
+  SET_IS_CURRENCY_OPEN,
+  SET_IS_CART_OPEN,
 } from "../actions/cartActions";
 
 const initialState = {
   cart: [],
   products: [],
   price: { currency: "USD", symbol: "$" },
+  isCurrencyOpen: false,
+  isCartOpen: false,
 };
 
 const cartReducers = (state = initialState, action) => {
@@ -54,6 +57,12 @@ const cartReducers = (state = initialState, action) => {
 
     case ADD_TO_PRODUCTS:
       return { ...state, products: action.products };
+
+    case SET_IS_CURRENCY_OPEN:
+      return { ...state, isCurrencyOpen: action.payload };
+
+    case SET_IS_CART_OPEN:
+      return { ...state, isCartOpen: action.payload };
 
     default:
       return { ...state };
