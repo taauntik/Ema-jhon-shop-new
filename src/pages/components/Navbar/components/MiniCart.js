@@ -8,15 +8,22 @@ import AddOrRemoveBtn from "../../AddOrRemoveBtn/AddOrRemoveBtn";
 
 // styles
 import {
+  BoldMiniCartCaption,
+  BtnContainer,
   Buttons,
   Cart,
   CartImage,
   CartItem,
   CartItemsLength,
   CartNav,
+  CartPdName,
+  CartPdPrice,
+  CheckoutBtn,
   Image,
   Img,
   Info,
+  Items,
+  MiniCartCaption,
   NavLink,
   Total,
   ViewBag,
@@ -87,57 +94,72 @@ class MiniCart extends PureComponent {
         {isCartOpen === true && (
           <>
             <Cart ref={this.setCartRef} id="mini-cart">
-              <h5>My Bag, {cart.length} items</h5>
-              {cart.map((item) => (
-                <>
-                  <CartItem>
-                    <Info>
-                      <h4>{item.name}</h4>
-                      {item.prices.map(
-                        (newItem) =>
-                          newItem.currency === price.currency && (
-                            <p>
-                              {price.symbol}{" "}
-                              {(newItem.amount * item.amount).toFixed(2)}
-                            </p>
-                          )
-                      )}
-                    </Info>
-                    <Image>
-                      <Buttons>
-                        <AddOrRemoveBtn
-                          value="+"
-                          verticalPadding={3}
-                          horizontalPadding={8}
-                          onClick={() => addToCart(item)}
-                        />
-                        <span style={{ margin: "5px" }}>{item.amount}</span>
-                        <AddOrRemoveBtn
-                          value="-"
-                          verticalPadding={4}
-                          horizontalPadding={10}
-                          onClick={() => removeFromCart(item.id)}
-                        />
-                      </Buttons>
-                      <CartImage src={item.gallery[0]} alt="" />
-                    </Image>
-                  </CartItem>
-                </>
-              ))}
+              <MiniCartCaption>
+                <BoldMiniCartCaption>My Bag,</BoldMiniCartCaption> {cart.length}{" "}
+                items
+              </MiniCartCaption>
+              <Items>
+                {cart.map((item) => (
+                  <>
+                    <CartItem>
+                      <Info>
+                        <CartPdName>{item.name}</CartPdName>
+                        {item.prices.map(
+                          (newItem) =>
+                            newItem.currency === price.currency && (
+                              <CartPdPrice>
+                                {price.symbol}{" "}
+                                {(newItem.amount * item.amount).toFixed(2)}
+                              </CartPdPrice>
+                            )
+                        )}
+                      </Info>
+                      <Image>
+                        <Buttons>
+                          <AddOrRemoveBtn
+                            value="+"
+                            verticalPadding={3}
+                            horizontalPadding={8}
+                            onClick={() => addToCart(item)}
+                          />
+                          <span style={{ margin: "5px" }}>{item.amount}</span>
+                          <AddOrRemoveBtn
+                            value="-"
+                            verticalPadding={4}
+                            horizontalPadding={10}
+                            onClick={() => removeFromCart(item.id)}
+                          />
+                        </Buttons>
+                        <CartImage src={item.gallery[0]} alt="" />
+                      </Image>
+                    </CartItem>
+                  </>
+                ))}
+              </Items>
               <Total>
                 <h4>Total</h4>
                 <p style={{ display: "block" }}>
                   {price.symbol} {result.toFixed(2)}
                 </p>
               </Total>
-              <ViewBag
-                as={Link}
-                to="/cart"
-                type="button"
-                onClick={() => setIsCartOpen(false)}
-              >
-                View Bag
-              </ViewBag>
+              <BtnContainer>
+                <ViewBag
+                  as={Link}
+                  to="/cart"
+                  type="button"
+                  onClick={() => setIsCartOpen(false)}
+                >
+                  View Bag
+                </ViewBag>
+                <CheckoutBtn
+                  as={Link}
+                  to="/cart"
+                  type="button"
+                  onClick={() => setIsCartOpen(false)}
+                >
+                  Check out
+                </CheckoutBtn>
+              </BtnContainer>
             </Cart>
           </>
         )}

@@ -1,5 +1,7 @@
 import React, { PureComponent } from "react";
-import styled from "styled-components";
+
+// styles
+import { BtnWrapper } from "./AddOrRemoveBtn.styles";
 
 class AddOrRemoveBtn extends PureComponent {
   render() {
@@ -15,17 +17,5 @@ class AddOrRemoveBtn extends PureComponent {
     );
   }
 }
-
-const BtnWrapper = styled.div`
-  border: 1px solid black;
-  display: flex;
-  justify-content: center;
-  font-size: 20px;
-  cursor: pointer;
-  :hover {
-    color: white;
-    background-color: black;
-  }
-`;
 
 export default AddOrRemoveBtn;
