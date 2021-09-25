@@ -1,4 +1,6 @@
 import React, { PureComponent } from "react";
+
+// styles
 import {
   ImagesWrapper,
   LittleImage,
