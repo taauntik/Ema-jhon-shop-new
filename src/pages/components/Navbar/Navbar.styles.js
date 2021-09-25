@@ -152,7 +152,7 @@ export const ViewBag = styled.button`
   :hover {
     background-color: #5ece7b;
     color: white;
-    border: none;
+    border: 1px solid #5ece7b;
   }
 `;
 
@@ -168,6 +168,7 @@ export const CheckoutBtn = styled.button`
   background-color: #5ece7b;
   transition: 0.2s;
   cursor: pointer;
+  border: 1px solid #5ece7b;
   margin-left: 10px;
   :hover {
     background-color: #ffffff;

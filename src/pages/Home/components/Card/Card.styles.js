@@ -57,7 +57,7 @@ const AddToCartBtn = styled.div`
   transform: translateY(-140px) translateX(200px);
   box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
   :hover {
-    box-shadow: 0px 4px 35px #c7c7c7;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
   }
 `;
 
