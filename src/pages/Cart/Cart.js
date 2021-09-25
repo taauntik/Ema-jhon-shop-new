@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { addToCart, removeFromCart } from "../../redux/actions/cartActions";
 import { Overlay } from "../components/Overlay/Overlay";
 import CartItem from "./components/CartItem/CartItem";
 
-class Cart extends Component {
+class Cart extends PureComponent {
   render() {
     console.log(this.props);
     const { cart, addToCart, removeFromCart, price, isCartOpen } = this.props;

@@ -61,6 +61,41 @@ const AddToCartBtn = styled.div`
   }
 `;
 
+const PdCard = styled.div`
+  margin: 20px 0px;
+  :hover .btn {
+    display: block;
+    position: absolute;
+  }
+  :hover {
+    box-shadow: 0px 4px 35px #e8e7e3;
+  }
+`;
+
+const BackgroundImage = styled.div`
+  width: 100%;
+  height: 250px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: ${({ img }) => `url(${img})`};
+`;
+
+const CardOverlay = styled.div`
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  background-color: white;
+  transform: translateY(300) translateX(300);
+  opacity: 0.6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  color: #8d8f9a;
+  font-size: 20px;
+`;
+
 export {
   CardContainer,
   CardImage,
@@ -69,4 +104,7 @@ export {
   CardInfo,
   AddToCartBtn,
   Price,
+  PdCard,
+  BackgroundImage,
+  CardOverlay,
 };

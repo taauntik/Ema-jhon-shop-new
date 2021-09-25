@@ -1,8 +1,12 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
+
+// styles
+import { CardContainer } from "../Home/Home.styles";
+
+// components
 import { Overlay } from "../components/Overlay/Overlay";
 import Card from "../Home/components/Card/Card";
-import { CardContainer } from "../Home/Home.styles";
 
 class Tech extends PureComponent {
   render() {

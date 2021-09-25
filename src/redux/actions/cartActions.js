@@ -4,6 +4,7 @@ const ADD_TO_PRODUCTS = "ADD_TO_PRODUCTS";
 const CHANGE_CURRENCY = "CHANGE_CURRENCY";
 const SET_IS_CURRENCY_OPEN = "SET_IS_CURRENCY_OPEN";
 const SET_IS_CART_OPEN = "SET_IS_CART_OPEN";
+const SET_SEARCH = "SET_SEARCH";
 
 const addToCart = (product) => {
   return {
@@ -49,6 +50,13 @@ const setIsCartOpen = (bool) => {
   };
 };
 
+const setSearch = (search) => {
+  return {
+    type: SET_SEARCH,
+    payload: search,
+  };
+};
+
 export {
   ADD_TO_CART,
   REMOVE_FROM_CART,
@@ -56,10 +64,12 @@ export {
   CHANGE_CURRENCY,
   SET_IS_CURRENCY_OPEN,
   SET_IS_CART_OPEN,
+  SET_SEARCH,
   addToProducts,
   addToCart,
   removeFromCart,
   changeCurrency,
   setIsCurrencyOpen,
   setIsCartOpen,
+  setSearch,
 };

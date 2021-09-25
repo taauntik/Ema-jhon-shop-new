@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import styled from "styled-components";
 import AddOrRemoveBtn from "../../../components/AddOrRemoveBtn/AddOrRemoveBtn";
 
-class CartItem extends Component {
+class CartItem extends PureComponent {
   render() {
     console.log("Props from the CartItem: ", this.props);
     const { cart, addToCart, removeFromCart, price } = this.props;

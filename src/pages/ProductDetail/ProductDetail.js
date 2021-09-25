@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router";
 import { LOAD_PRODUCTS_WITH_ID } from "../../GraphQL/Queries";
@@ -8,7 +8,7 @@ import { addToCart } from "../../redux/actions/cartActions";
 import { connect } from "react-redux";
 import { Overlay } from "../components/Overlay/Overlay";
 
-class ProductDetail extends Component {
+class ProductDetail extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {

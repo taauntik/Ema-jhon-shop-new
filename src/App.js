@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
 import Home from "./pages/Home/Home";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -20,7 +20,7 @@ export const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-class App extends Component {
+class App extends PureComponent {
   componentDidMount() {
     client
       .query({

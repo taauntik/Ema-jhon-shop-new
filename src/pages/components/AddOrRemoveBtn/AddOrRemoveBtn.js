@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import styled from "styled-components";
 
-class AddOrRemoveBtn extends Component {
+class AddOrRemoveBtn extends PureComponent {
   render() {
     return (
       <BtnWrapper

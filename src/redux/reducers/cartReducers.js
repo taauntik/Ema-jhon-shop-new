@@ -5,6 +5,7 @@ import {
   REMOVE_FROM_CART,
   SET_IS_CURRENCY_OPEN,
   SET_IS_CART_OPEN,
+  SET_SEARCH,
 } from "../actions/cartActions";
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   price: { currency: "USD", symbol: "$" },
   isCurrencyOpen: false,
   isCartOpen: false,
+  search: "",
 };
 
 const cartReducers = (state = initialState, action) => {
@@ -63,6 +65,9 @@ const cartReducers = (state = initialState, action) => {
 
     case SET_IS_CART_OPEN:
       return { ...state, isCartOpen: action.payload };
+
+    case SET_SEARCH:
+      return { ...state, search: action.payload };
 
     default:
       return { ...state };
