@@ -1,10 +1,19 @@
 import React, { PureComponent } from "react";
-import styled from "styled-components";
+
+// styles
+import {
+  CartBtns,
+  CartItemContainer,
+  CartItemEnd,
+  CartItemStart,
+} from "../../Cart.styles";
+
+// components
 import AddOrRemoveBtn from "../../../components/AddOrRemoveBtn/AddOrRemoveBtn";
+import CartItemImageSlider from "../CartItemImageSlider/CartItemImageSlider";
 
 class CartItem extends PureComponent {
   render() {
-    console.log("Props from the CartItem: ", this.props);
     const { cart, addToCart, removeFromCart, price } = this.props;
     const { name, prices, gallery, amount, id } = cart;
     return (
@@ -37,7 +46,7 @@ class CartItem extends PureComponent {
                 onClick={() => removeFromCart(id)}
               />
             </CartBtns>
-            <CartItemImage src={gallery[0]} alt="" />
+            <CartItemImageSlider gallery={gallery} />
           </CartItemEnd>
         </CartItemContainer>
         <hr />
@@ -45,30 +54,5 @@ class CartItem extends PureComponent {
     );
   }
 }
-
-const CartItemContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-`;
-
-const CartBtns = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-`;
-
-const CartItemStart = styled.div``;
-
-const CartItemImage = styled.img`
-  width: 150px;
-  height: 150px;
-  padding: 0 20px;
-`;
-
-const CartItemEnd = styled.div`
-  display: flex;
-`;
 
 export default CartItem;

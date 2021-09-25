@@ -1,13 +1,18 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import styled from "styled-components";
+
+// redux
 import { addToCart, removeFromCart } from "../../redux/actions/cartActions";
-import { Overlay } from "../components/Overlay/Overlay";
+
+// styles
+import { CartContainer } from "./Cart.styles";
+
+// components
 import CartItem from "./components/CartItem/CartItem";
+import { Overlay } from "../components/Overlay/Overlay";
 
 class Cart extends PureComponent {
   render() {
-    console.log(this.props);
     const { cart, addToCart, removeFromCart, price, isCartOpen } = this.props;
     return (
       <div>
@@ -29,10 +34,6 @@ class Cart extends PureComponent {
     );
   }
 }
-
-const CartContainer = styled.div`
-  margin: 0px 60px;
-`;
 
 const mapStateToProps = (state) => {
   return {
