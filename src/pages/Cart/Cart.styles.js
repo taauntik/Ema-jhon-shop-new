@@ -2,12 +2,37 @@ import styled from "styled-components";
 
 export const CartContainer = styled.div`
   margin: 0px 60px;
+  font-family: Raleway, sans-serif;
 `;
 
 export const CartItemContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+`;
+
+export const ItemAmount = styled.span`
+  margin: 5;
+  font-size: 24px;
+  font-weight: 500;
+`;
+
+export const BrandText = styled.p`
+  color: #1d1f22;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 27px;
+`;
+
+export const ItemPrice = styled.p`
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 18px;
+`;
+
+export const NameText = styled.p`
+  font-size: 30px;
+  color: #1d1f22;
+  font-weight: 400;
 `;
 
 export const CartBtns = styled.div`
@@ -27,6 +52,7 @@ export const CartItemImage = styled.div`
   width: 141px;
   height: 185px;
   padding: 0 20px;
+  margin-left: 27px;
   display: flex;
   justify-content: space-between;
   align-items: center;

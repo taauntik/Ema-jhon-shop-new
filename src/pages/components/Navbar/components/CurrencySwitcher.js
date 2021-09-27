@@ -30,6 +30,31 @@ const currencies = [
 ];
 
 class CurrencySwitcher extends PureComponent {
+  constructor() {
+    super();
+    this.setCurrencyRef = this.setCurrencyRef.bind(this);
+    this.handleClickOutSide = this.handleClickOutSide.bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener("mousedown", this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.addEventListener("mousedown", this.handleClickOutside);
+  }
+
+  handleClickOutSide(event) {
+    if (this.currencyRef && !this.currencyRef.contains(event.target)) {
+      // this.props.setIsCurrencyOpen(false);
+      console.log("You just clicked out side");
+    }
+  }
+
+  setCurrencyRef(node) {
+    this.currencyRef = node;
+  }
+
   changeCurrencyOfPrice(currency, symbol) {
     this.props.changeCurrency(currency, symbol);
     this.props.setIsCurrencyOpen(!this.props.isCurrencyOpen);
@@ -56,7 +81,7 @@ class CurrencySwitcher extends PureComponent {
           )}
         </CurrencyDropDown>
         {isCurrencyOpen === true && (
-          <CurrencyList>
+          <CurrencyList ref={this.setCurrencyRef}>
             {currencies.map((item) => (
               <CurrencyListItem
                 key={`${new Date()}${Math.random() * 10000}`}

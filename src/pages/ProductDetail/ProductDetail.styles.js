@@ -6,6 +6,31 @@ export const Center = styled.div`
   align-items: center;
 `;
 
+export const AttrSelector = styled.div`
+  margin-right: 20px;
+  border: 1px solid #1d1f22;
+  width: 63px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.2s;
+  background-color: ${({ selected }) => (selected ? "#1d1f22" : "white")};
+  color: ${({ selected }) => (selected ? "white" : "#1D1F22")};
+  ${({ selected, type }) =>
+    selected === true && type === "swatch"
+      ? `
+      border: 2px solid red;
+      padding: 6px;
+  `
+      : null}
+  :hover {
+    background-color: #1d1f22;
+    color: white;
+  }
+`;
+
 export const ProductDetailWrapper = styled.div`
   display: grid;
   max-width: 1440px;
@@ -61,7 +86,11 @@ export const SelectedImage = styled.img`
   border: 2px solid #e3db02;
 `;
 
-export const AttrContainer = styled.div``;
+export const AttrContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const InfoContainer = styled.div``;
 export const SelectImage = styled.div`

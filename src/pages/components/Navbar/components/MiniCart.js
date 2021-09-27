@@ -45,11 +45,15 @@ class MiniCart extends PureComponent {
   }
 
   componentDidMount() {
-    document.addEventListener("mousedown", this.handleClickOutside);
+    if (!this.props.isCartOpen) {
+      document.addEventListener("mousedown", this.handleClickOutside);
+    }
   }
 
   componentWillUnmount() {
-    document.addEventListener("mousedown", this.handleClickOutside);
+    if (this.props.isCartOpen) {
+      document.addEventListener("mousedown", this.handleClickOutside);
+    }
   }
 
   handleClickOutside(event) {
@@ -83,14 +87,25 @@ class MiniCart extends PureComponent {
 
     return (
       <CartNav>
-        <NavLink onClick={() => setIsCartOpen(true)}>
-          <Img src={Basket} alt="" />
-          {cart.length ? (
-            <CartItemsLength>{totalItems}</CartItemsLength>
-          ) : (
-            <div></div>
-          )}
-        </NavLink>
+        {isCartOpen === true ? (
+          <div>
+            <Img src={Basket} alt="" />
+            {cart.length ? (
+              <CartItemsLength>{totalItems}</CartItemsLength>
+            ) : (
+              <div></div>
+            )}
+          </div>
+        ) : (
+          <NavLink onClick={() => setIsCartOpen(true)}>
+            <Img src={Basket} alt="" />
+            {cart.length ? (
+              <CartItemsLength>{totalItems}</CartItemsLength>
+            ) : (
+              <div></div>
+            )}
+          </NavLink>
+        )}
         {isCartOpen === true && (
           <>
             <Cart ref={this.setCartRef} id="mini-cart">
@@ -103,6 +118,7 @@ class MiniCart extends PureComponent {
                   <>
                     <CartItem>
                       <Info>
+                        <CartPdName>{item.brand}</CartPdName>
                         <CartPdName>{item.name}</CartPdName>
                         {item.prices.map(
                           (newItem) =>
@@ -118,15 +134,25 @@ class MiniCart extends PureComponent {
                         <Buttons>
                           <AddOrRemoveBtn
                             value="+"
-                            verticalPadding={3}
-                            horizontalPadding={8}
+                            width={24}
+                            height={24}
+                            size={10}
                             onClick={() => addToCart(item)}
                           />
-                          <span style={{ margin: "5px" }}>{item.amount}</span>
+                          <span
+                            style={{
+                              margin: "5px",
+                              fontSize: "24px",
+                              fontWeight: "600",
+                            }}
+                          >
+                            {item.amount}
+                          </span>
                           <AddOrRemoveBtn
                             value="-"
-                            verticalPadding={4}
-                            horizontalPadding={10}
+                            height={24}
+                            width={24}
+                            size={10}
                             onClick={() => removeFromCart(item.id)}
                           />
                         </Buttons>

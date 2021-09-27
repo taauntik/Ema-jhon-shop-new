@@ -9,17 +9,19 @@ import DecrementBtn from "../../../assets/minus.svg";
 
 class AddOrRemoveBtn extends PureComponent {
   render() {
+    const { width, height, size } = this.props;
     return (
       <BtnWrapper
         onClick={this.props.onClick}
         style={{
-          padding: "10px",
+          width: `${width}px`,
+          height: `${height}px`,
         }}
       >
         {this.props.value === "+" ? (
-          <img src={IncrementBtn} alt="" width="12" />
+          <img src={IncrementBtn} alt="" width={size} />
         ) : (
-          <img src={DecrementBtn} alt="" width="12" />
+          <img src={DecrementBtn} alt="" width={size} />
         )}
       </BtnWrapper>
     );

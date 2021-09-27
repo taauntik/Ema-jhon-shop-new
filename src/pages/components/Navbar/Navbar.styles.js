@@ -223,7 +223,8 @@ export const CartItem = styled.div`
 `;
 
 export const CartPdName = styled.p`
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 300;
 `;
 
 export const CartPdPrice = styled.p`
