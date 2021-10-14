@@ -1,22 +1,22 @@
-import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import { client } from "../../App";
 
 // graphql & apollo
 import { LOAD_PRODUCTS_WITH_ID } from "../../GraphQL/Queries";
-import { client } from "../../App";
-
-// styles
-import { Center, ProductDetailWrapper } from "./ProductDetail.styles";
 
 // redux
 import { addToCart } from "../../redux/actions/cartActions";
 
 // components
 import { Overlay } from "../components/Overlay/Overlay";
-import ProductInfoContainer from "./components/ProductInfoContainer/ProductInfoContainer";
 import ImageContainer from "./components/ImageContainer/ImageContainer";
+import ProductInfoContainer from "./components/ProductInfoContainer/ProductInfoContainer";
+
+// styles
+import { Center, ProductDetailWrapper } from "./ProductDetail.styles";
 
 class ProductDetail extends PureComponent {
   constructor(props) {
@@ -46,40 +46,57 @@ class ProductDetail extends PureComponent {
       );
   }
 
+  renderProductDetailWrapper = ({
+    gallery,
+    name,
+    price,
+    product,
+    addToCart,
+  }) => (
+    <ProductDetailWrapper>
+      <ImageContainer gallery={gallery} name={name} />
+      <ProductInfoContainer
+        addToCart={addToCart}
+        price={price}
+        name={name}
+        product={product}
+      />
+    </ProductDetailWrapper>
+  );
+
   render() {
-    const { gallery, name } = this.state.product;
+    const { product } = this.state;
+    const { gallery, name } = product;
     const { addToCart, isCartOpen, price } = this.props;
 
     return (
-      <div>
+      <>
         {isCartOpen && <Overlay />}
-        <Center>
-          {this.state.product.id ? (
-            <ProductDetailWrapper>
-              <ImageContainer gallery={gallery} name={name} />
-              <ProductInfoContainer
-                addToCart={addToCart}
-                price={price}
-                name={name}
-                product={this.state.product}
-              />
-            </ProductDetailWrapper>
-          ) : (
-            <div></div>
-          )}
-        </Center>
-      </div>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Center>
+            {product.id ? (
+              this.renderProductDetailWrapper({
+                gallery,
+                name,
+                addToCart,
+                price,
+                product,
+              })
+            ) : (
+              <div></div>
+            )}
+          </Center>
+        </div>
+      </>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    cart: state.cart,
-    price: state.price,
-    isCartOpen: state.isCartOpen,
-  };
-};
+const mapStateToProps = ({ cart, price, isCartOpen }) => ({
+  cart,
+  price,
+  isCartOpen,
+});
 
 const mapDispatchToProps = {
   addToCart: addToCart,

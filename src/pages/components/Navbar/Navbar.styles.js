@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 export const NavContainer = styled.div`
   top: 0;
@@ -117,6 +117,7 @@ export const CurrencyDropDown = styled.div`
   background-color: white;
   outline: none;
   border: none;
+  margin-right: 20px;
 
   :hover {
     background-color: #ededed;

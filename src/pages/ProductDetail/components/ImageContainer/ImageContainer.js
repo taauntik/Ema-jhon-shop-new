@@ -1,13 +1,13 @@
 import React, { PureComponent } from "react";
-
 // styles
 import {
   ImagesWrapper,
   LittleImage,
   ProductImage,
   SelectedImage,
-  SelectImage,
+  SelectImage
 } from "../../ProductDetail.styles";
+
 
 class ImageContainer extends PureComponent {
   constructor() {
@@ -17,30 +17,37 @@ class ImageContainer extends PureComponent {
     };
   }
 
-  render() {
-    const { gallery, name } = this.props;
+  renderImages() {
+    const { gallery } = this.props;
     const { imageIndex } = this.state;
     return (
+      <SelectImage>
+        {gallery.map((item, index) => (
+          <div key={index}>
+            {index !== imageIndex ? (
+              <LittleImage
+                onClick={() => this.setState({ imageIndex: index })}
+                src={item}
+                alt=""
+              />
+            ) : (
+              <SelectedImage
+                onClick={() => this.setState({ imageIndex: index })}
+                src={item}
+                alt=""
+              />
+            )}
+          </div>
+        ))}
+      </SelectImage>
+    );
+  }
+
+  render() {
+    const { gallery, name } = this.props;
+    return (
       <ImagesWrapper>
-        <SelectImage>
-          {gallery.map((item, index) => (
-            <div key={index}>
-              {index !== imageIndex ? (
-                <LittleImage
-                  onClick={() => this.setState({ imageIndex: index })}
-                  src={item}
-                  alt=""
-                />
-              ) : (
-                <SelectedImage
-                  onClick={() => this.setState({ imageIndex: index })}
-                  src={item}
-                  alt=""
-                />
-              )}
-            </div>
-          ))}
-        </SelectImage>
+        {this.renderImages()}
         <ProductImage src={gallery[this.state.imageIndex]} alt={name} />
       </ImagesWrapper>
     );

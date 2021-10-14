@@ -1,12 +1,10 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-
-// styles
-import { CardContainer } from "../Home/Home.styles";
-
 // components
 import { Overlay } from "../components/Overlay/Overlay";
 import Card from "../Home/components/Card/Card";
+// styles
+import { CardContainer } from "../Home/Home.styles";
 
 class Tech extends PureComponent {
   render() {
@@ -30,12 +28,10 @@ class Tech extends PureComponent {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    products: state.products,
-    price: state.price,
-    isCartOpen: state.isCartOpen,
-  };
-};
+const mapStateToProps = ({ products, price, isCartOpen }) => ({
+  products,
+  price,
+  isCartOpen,
+});
 
 export default connect(mapStateToProps, null)(Tech);

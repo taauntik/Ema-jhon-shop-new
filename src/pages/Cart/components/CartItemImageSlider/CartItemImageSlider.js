@@ -1,11 +1,9 @@
 import React, { PureComponent } from "react";
-
-// styles
-import { CartArrowIcon, CartItemImage } from "../../Cart.styles";
-
+import LeftArrow from "../../../../assets/leftArrow.svg";
 // images
 import RightArrow from "../../../../assets/rightArrow.svg";
-import LeftArrow from "../../../../assets/leftArrow.svg";
+// styles
+import { CartArrowIcon, CartItemImage } from "../../Cart.styles";
 
 class CartItemImageSlider extends PureComponent {
   constructor() {
@@ -15,7 +13,7 @@ class CartItemImageSlider extends PureComponent {
     };
   }
 
-  ImageGoesRight(goesRight) {
+  ImageGoesRight = (goesRight) => {
     const { gallery } = this.props;
     const { imageIndex } = this.state;
     const images = gallery.length - 1;
@@ -27,28 +25,32 @@ class CartItemImageSlider extends PureComponent {
     }
   }
 
+  renderCartImageSlider = ({ gallery, imageIndex }) => (
+    <CartItemImage src={gallery[imageIndex]}>
+      <CartArrowIcon
+        onClick={() => this.ImageGoesRight(false)}
+        src={LeftArrow}
+        alt=""
+      />
+      <CartArrowIcon
+        onClick={() => this.ImageGoesRight(true)}
+        src={RightArrow}
+        alt=""
+      />
+    </CartItemImage>
+  );
+
   render() {
     const { gallery } = this.props;
     const { imageIndex } = this.state;
     return (
-      <div>
+      <>
         {gallery.length > 1 ? (
-          <CartItemImage src={gallery[imageIndex]}>
-            <CartArrowIcon
-              onClick={() => this.ImageGoesRight(false)}
-              src={LeftArrow}
-              alt=""
-            />
-            <CartArrowIcon
-              onClick={() => this.ImageGoesRight(true)}
-              src={RightArrow}
-              alt=""
-            />
-          </CartItemImage>
+          this.renderCartImageSlider({ gallery, imageIndex })
         ) : (
           <CartItemImage src={gallery[0]} />
         )}
-      </div>
+      </>
     );
   }
 }

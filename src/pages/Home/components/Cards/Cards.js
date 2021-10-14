@@ -1,14 +1,15 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import Card from "../Card/Card";
 import { CardContainer } from "../../Home.styles";
+import Card from "../Card/Card";
 
 class Cards extends PureComponent {
-  render() {
+
+  renderCards() {
     const { products, search } = this.props;
     const { categories } = products;
     return (
-      <CardContainer>
+      <>
         {categories &&
           categories.map(({ products }) => {
             if (search === "") {
@@ -22,8 +23,12 @@ class Cards extends PureComponent {
               );
             }
           })}
-      </CardContainer>
+      </>
     );
+  }
+
+  render() {
+    return <CardContainer>{this.renderCards()}</CardContainer>;
   }
 }
 

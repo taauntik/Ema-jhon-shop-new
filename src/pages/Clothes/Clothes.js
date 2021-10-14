@@ -1,12 +1,10 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-
-// styles
-import { CardContainer } from "../Home/Home.styles";
-
+import { Overlay } from "../components/Overlay/Overlay";
 // components
 import Card from "../Home/components/Card/Card";
-import { Overlay } from "../components/Overlay/Overlay";
+// styles
+import { CardContainer } from "../Home/Home.styles";
 
 class Clothes extends PureComponent {
   render() {
@@ -29,12 +27,10 @@ class Clothes extends PureComponent {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    products: state.products,
-    price: state.price,
-    isCartOpen: state.isCartOpen,
-  };
-};
+const mapStateToProps = ({ products, price, isCartOpen }) => ({
+  products,
+  price,
+  isCartOpen,
+});
 
 export default connect(mapStateToProps, null)(Clothes);

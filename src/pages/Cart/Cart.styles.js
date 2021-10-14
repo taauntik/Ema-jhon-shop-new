@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
 export const CartContainer = styled.div`
-  margin: 0px 60px;
+  margin: 0px 0px;
+  width: 90%;
   font-family: Raleway, sans-serif;
+  max-width: 1440px;
 `;
 
 export const CartItemContainer = styled.div`

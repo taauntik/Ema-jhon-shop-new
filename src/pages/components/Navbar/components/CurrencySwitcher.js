@@ -1,24 +1,21 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-
+import DownArrow from "../../../../assets/downArrow.svg";
 // images
 import UpperArrow from "../../../../assets/upperArrow.svg";
-import DownArrow from "../../../../assets/downArrow.svg";
-
-// styles
-import {
-  CurrencyDropDown,
-  CurrencyText,
-  DownIcon,
-  CurrencyList,
-  CurrencyListItem,
-} from "../Navbar.styles";
-
 // redux
 import {
   changeCurrency,
-  setIsCurrencyOpen,
+  setIsCurrencyOpen
 } from "../../../../redux/actions/cartActions";
+// styles
+import {
+  CurrencyDropDown,
+  CurrencyList,
+  CurrencyListItem,
+  CurrencyText,
+  DownIcon
+} from "../Navbar.styles";
 
 // currency data
 const currencies = [
@@ -47,7 +44,6 @@ class CurrencySwitcher extends PureComponent {
   handleClickOutSide(event) {
     if (this.currencyRef && !this.currencyRef.contains(event.target)) {
       // this.props.setIsCurrencyOpen(false);
-      console.log("You just clicked out side");
     }
   }
 
@@ -60,51 +56,56 @@ class CurrencySwitcher extends PureComponent {
     this.props.setIsCurrencyOpen(!this.props.isCurrencyOpen);
   }
 
-  render() {
-    const { setIsCurrencyOpen, isCurrencyOpen, price } = this.props;
+  renderCurrencyDropDownIcon = ({ icon }) => {
+    const { price } = this.props;
     return (
       <>
-        <CurrencyDropDown
-          onClick={() => setIsCurrencyOpen(!isCurrencyOpen)}
-          style={{ marginRight: "20px" }}
-        >
-          {isCurrencyOpen === true ? (
-            <>
-              <CurrencyText>{price.symbol}</CurrencyText>
-              <DownIcon src={UpperArrow} alt="upper" />
-            </>
-          ) : (
-            <>
-              <CurrencyText>{price.symbol}</CurrencyText>
-              <DownIcon src={DownArrow} alt="upper" />
-            </>
-          )}
-        </CurrencyDropDown>
-        {isCurrencyOpen === true && (
-          <CurrencyList ref={this.setCurrencyRef}>
-            {currencies.map((item) => (
-              <CurrencyListItem
-                key={`${new Date()}${Math.random() * 10000}`}
-                onClick={() =>
-                  this.changeCurrencyOfPrice(item.currency, item.symbol)
-                }
-              >
-                {item.symbol} {item.currency}
-              </CurrencyListItem>
-            ))}
-          </CurrencyList>
-        )}
+        <CurrencyText>{price.symbol}</CurrencyText>
+        <DownIcon src={icon} alt="upper" />
       </>
     );
+  };
+
+  renderCurrencyList = () => {
+    return (
+      <CurrencyList ref={this.setCurrencyRef}>
+        {currencies.map((item) => (
+          <CurrencyListItem
+            key={`${new Date()}${Math.random() * 10000}`}
+            onClick={() =>
+              this.changeCurrencyOfPrice(item.currency, item.symbol)
+            }
+          >
+            {item.symbol} {item.currency}
+          </CurrencyListItem>
+        ))}
+      </CurrencyList>
+    );
+  };
+
+  renderCurrencySwitcher = () => {
+    const { setIsCurrencyOpen, isCurrencyOpen } = this.props;
+    return (
+      <>
+        <CurrencyDropDown onClick={() => setIsCurrencyOpen(!isCurrencyOpen)}>
+          {isCurrencyOpen === true
+            ? this.renderCurrencyDropDownIcon({ icon: UpperArrow })
+            : this.renderCurrencyDropDownIcon({ icon: DownArrow })}
+        </CurrencyDropDown>
+        {isCurrencyOpen === true && this.renderCurrencyList()}
+      </>
+    );
+  };
+
+  render() {
+    return this.renderCurrencySwitcher();
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isCurrencyOpen: state.isCurrencyOpen,
-    price: state.price,
-  };
-};
+const mapStateToProps = ({ isCurrencyOpen, price }) => ({
+  isCurrencyOpen,
+  price,
+});
 
 const mapDispatchToProps = {
   setIsCurrencyOpen: setIsCurrencyOpen,

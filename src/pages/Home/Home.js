@@ -1,33 +1,30 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-
-// styles
-import { Heading, Container } from "./Home.styles";
-
 // components
 import { Overlay } from "../components/Overlay/Overlay";
-import SearchInput from "./components/Search/SearchInput";
 import Cards from "./components/Cards/Cards";
+import SearchInput from "./components/Search/SearchInput";
+// styles
+import { Container, Heading } from "./Home.styles";
 
 class Home extends PureComponent {
   render() {
+    const { isCartOpen } = this.props;
     return (
       <div>
-        {this.props.isCartOpen && <Overlay />}
-        <Container>
-          <Heading>Category Name</Heading>
-          <SearchInput />
-          <Cards />
-        </Container>
+        {isCartOpen && <Overlay />}
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Container>
+            <Heading>Category Name</Heading>
+            <SearchInput />
+            <Cards />
+          </Container>
+        </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isCartOpen: state.isCartOpen,
-  };
-};
+const mapStateToProps = ({ isCartOpen }) => ({ isCartOpen });
 
 export default connect(mapStateToProps, null)(Home);

@@ -4,13 +4,23 @@ export const Center = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 1440px;
 `;
 
 export const AttrSelector = styled.div`
   margin-right: 20px;
   border: 1px solid #1d1f22;
-  width: 63px;
-  height: 45px;
+  ${({ miniCart }) =>
+    miniCart
+      ? `
+    width: 40px;
+    height: 40px;
+    font-size: 12px;
+  `
+      : `
+    width: 63px;
+    height: 45px;
+  `}
   display: flex;
   justify-content: center;
   align-items: center;

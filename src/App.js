@@ -1,15 +1,16 @@
+import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 import React, { PureComponent } from "react";
-import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
-import Home from "./pages/Home/Home";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Navbar from "./pages/components/Navbar/Navbar";
-import ProductDetail from "./pages/ProductDetail/ProductDetail";
-import Cart from "./pages/Cart/Cart";
-import Tech from "./pages/Tech/Tech";
-import Clothes from "./pages/Clothes/Clothes";
-import { addToProducts } from "./redux/actions/cartActions";
 import { connect } from "react-redux";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { PageContainer } from "./App.styles";
 import { LOAD_CATEGORIES } from "./GraphQL/Queries";
+import Cart from "./pages/Cart/Cart";
+import Clothes from "./pages/Clothes/Clothes";
+import Navbar from "./pages/components/Navbar/Navbar";
+import Home from "./pages/Home/Home";
+import ProductDetail from "./pages/ProductDetail/ProductDetail";
+import Tech from "./pages/Tech/Tech";
+import { addToProducts } from "./redux/actions/cartActions";
 
 const link = new HttpLink({
   uri: "http://localhost:4000/",
@@ -30,7 +31,6 @@ class App extends PureComponent {
   }
 
   render() {
-    console.log("APP PROPS", this.props);
     return (
       <Router>
         <Navbar />
@@ -56,12 +56,7 @@ class App extends PureComponent {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    products: state.products,
-    price: state.price,
-  };
-};
+const mapStateToProps = ({ products, price }) => ({ products, price });
 
 const mapDispatchToProps = {
   addToProducts: addToProducts,
