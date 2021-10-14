@@ -2,7 +2,6 @@ import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { PageContainer } from "./App.styles";
 import { LOAD_CATEGORIES } from "./GraphQL/Queries";
 import Cart from "./pages/Cart/Cart";
 import Clothes from "./pages/Clothes/Clothes";

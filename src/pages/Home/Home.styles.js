@@ -8,6 +8,7 @@ const Heading = styled.h1`
 const Container = styled.div`
   margin: 20px 30px;
   max-width: 1440px;
+  width: 100%;
 `;
 
 const CardContainer = styled.div`
