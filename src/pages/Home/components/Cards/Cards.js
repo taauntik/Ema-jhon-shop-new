@@ -4,7 +4,6 @@ import { CardContainer } from "../../Home.styles";
 import Card from "../Card/Card";
 
 class Cards extends PureComponent {
-
   renderCards() {
     const { products, search } = this.props;
     const { categories } = products;
@@ -32,11 +31,9 @@ class Cards extends PureComponent {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    search: state.search,
-    products: state.products,
-  };
-};
+const mapStateToProps = ({ search, products }) => ({
+  search,
+  products,
+});
 
 export default connect(mapStateToProps, null)(Cards);
